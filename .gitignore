@@ -3,3 +3,4 @@
 .vs
 build
 documentation
+compile_commands.json
