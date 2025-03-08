@@ -1,4 +1,8 @@
+include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_config/CompilerFlags.cmake)
+
 set(TEST_SOURCES tests.cpp)
+
+set(CMAKE_CXX_FLAGS ${DEBUG_UT_FLAGS})
 
 find_package(GTest REQUIRED)
 add_executable(tests ${TEST_SOURCES})
