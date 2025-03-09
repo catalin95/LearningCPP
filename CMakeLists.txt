@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 3.31.6)
+cmake_minimum_required(VERSION 3.30.8)
 project(Learning VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
+set(Program main)
 
 include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_config/CompilerFlags.cmake)
 
@@ -8,6 +9,7 @@ include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_config/CompilerFlags.cmake)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 add_subdirectory(source)
 add_subdirectory(tests)
+add_subdirectory(mocks)
 
 set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
 
