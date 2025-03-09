@@ -10,7 +10,7 @@ find_package(GTest REQUIRED)
 add_executable(tests ${TEST_SOURCES})
 target_link_libraries(tests
   PRIVATE
-    work_lib
+    # work_lib
     GTest::gtest
     GTest::gmock
     GTest::gtest_main
