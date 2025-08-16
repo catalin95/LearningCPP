@@ -45,13 +45,13 @@ function(set_compiler_flags_main_app)
     message(STATUS "Setting compiler flags for ${CMAKE_CXX_COMPILER_ID}")
 
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
+        set(CMAKE_CXX_FLAGS ${DEBUG_CLANG_FLAGS})
         
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
+        set(CMAKE_CXX_FLAGS ${DEBUG_GCC_FLAGS})
 
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-        set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
+        set(CMAKE_CXX_FLAGS ${DEBUG_GCC_FLAGS})
 
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         set(CMAKE_CXX_FLAGS ${DEBUG_MSVC_FLAGS})
@@ -72,13 +72,13 @@ function(set_compiler_flags_uts)
     message(STATUS "Setting compiler flags for ${CMAKE_CXX_COMPILER_ID}")
 
     if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-        set(CMAKE_CXX_FLAGS ${DEBUG_UT_FLAGS})
+        set(CMAKE_CXX_FLAGS ${DEBUG_CLANG_FLAGS})
         
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-        set(CMAKE_CXX_FLAGS ${DEBUG_UT_FLAGS})
+        set(CMAKE_CXX_FLAGS ${DEBUG_GCC_FLAGS})
 
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
-        set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
+        set(CMAKE_CXX_FLAGS ${DEBUG_GCC_FLAGS})
 
     elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
         message(WARNING "Reusing MSVC flags for main app")
