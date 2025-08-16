@@ -15,6 +15,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Generate compile_commands.json"
 
 # Option to enable clang-tidy dependency
 option(ENABLE_CLANG_TIDY "Enable running clang-tidy as part of the build" OFF)
+option(ENABLE_CPPCHECK "Enable running cppcheck as part of the build" OFF)
 
 enable_testing()
 
@@ -33,7 +34,12 @@ target_link_libraries(main PRIVATE work_lib)
 
 # add custom target to run clang-tidy like tidy_target
 enable_clang_tidy(main)
+enable_cppcheck(main)
 
 if(ENABLE_CLANG_TIDY)
     add_dependencies(main tidy_main)
+endif()
+
+if(ENABLE_CPPCHECK)
+    add_dependencies(main cppcheck_main)
 endif()

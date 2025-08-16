@@ -45,3 +45,13 @@ target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/include
 add_test(NAME UnitTests COMMAND tests)
 
 enable_coverage(${This})
+enable_clang_tidy(${This})
+enable_cppcheck(${This})
+
+if(ENABLE_CLANG_TIDY)
+    add_dependencies(${This} tidy_${This})
+endif()
+
+if(ENABLE_CPPCHECK)
+    add_dependencies(${This} cppcheck_${This})
+endif()
