@@ -7,3 +7,4 @@ documentation
 compile_commands.json
 .DS_Store
 default.profraw
+main.dSYM
