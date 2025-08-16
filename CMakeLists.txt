@@ -8,9 +8,9 @@ set_default_cxx_compiler_if_needed()
 
 project(Learning VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
-set(MainProgram main)
+set(MainProgram app)
+set(CMAKE_BUILD_TYPE Debug)
 
-set_compiler_flags_main_app()
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Generate compile_commands.json" FORCE)
 
 # Option to enable clang-tidy dependency
@@ -27,19 +27,20 @@ add_subdirectory(mocks)
 
 set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
 
-add_executable(main main.cpp)
+add_executable(${MainProgram} ${MainProgram}.cpp)
 
-target_include_directories(main PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(main PRIVATE work_lib)
+target_include_directories(${MainProgram}  PRIVATE ${CMAKE_SOURCE_DIR}/include)
+target_link_libraries(${MainProgram}  PRIVATE work_lib)
+set_target_flags(${MainProgram}  ${CMAKE_BUILD_TYPE})
 
 # add custom target to run clang-tidy like tidy_target
-enable_clang_tidy(main)
-enable_cppcheck(main)
+enable_clang_tidy(${MainProgram})
+enable_cppcheck(${MainProgram})
 
 if(ENABLE_CLANG_TIDY)
-    add_dependencies(main tidy_main)
+    add_dependencies(${MainProgram} tidy_${MainProgram})
 endif()
 
 if(ENABLE_CPPCHECK)
-    add_dependencies(main cppcheck_main)
+    add_dependencies(${MainProgram} cppcheck_${MainProgram})
 endif()

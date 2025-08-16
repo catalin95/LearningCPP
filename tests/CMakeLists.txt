@@ -2,8 +2,6 @@
 include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_functions/CoverageFunctions.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_functions/UtilityFunctions.cmake)
 
-set_compiler_flags_uts()
-
 # Set the CMake package search path for Google Test
 list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib/cmake/GTest")
 
@@ -13,8 +11,8 @@ set(CMAKE_BUILD_TYPE Debug)
 find_package(GTest REQUIRED)
 
 # Set source files and the target name
-set(TEST_SOURCES tests.cpp ${CMAKE_SOURCE_DIR}/source/work.cpp)
-set(This tests)
+set(MainProgramTests app_tests)
+set(TEST_SOURCES ${MainProgramTests}.cpp ${CMAKE_SOURCE_DIR}/source/work.cpp)
 
 # Set CMake flags (you may already have specific debug flags for unit tests here)
 set(CMAKE_CXX_FLAGS ${DEBUG_UT_FLAGS})
@@ -23,10 +21,10 @@ set(CMAKE_CXX_FLAGS ${DEBUG_UT_FLAGS})
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # Create the executable for tests
-add_executable(tests ${TEST_SOURCES})
+add_executable(${MainProgramTests} ${TEST_SOURCES})
 
 # Link the necessary libraries to the tests executable
-target_link_libraries(tests
+target_link_libraries(${MainProgramTests}
   PRIVATE
     GTest::gtest
     GTest::gmock
@@ -35,8 +33,10 @@ target_link_libraries(tests
 )
 
 # Include necessary directories for the tests
-target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/include
+target_include_directories(${MainProgramTests} PRIVATE ${CMAKE_SOURCE_DIR}/include
                           ${CMAKE_SOURCE_DIR}/mocks)
+
+set_target_flags(${MainProgramTests} ${CMAKE_BUILD_TYPE})
 
 # # Enable testing
 # enable_testing()
@@ -44,14 +44,14 @@ target_include_directories(tests PRIVATE ${CMAKE_SOURCE_DIR}/include
 # Add the test command to CTest
 add_test(NAME UnitTests COMMAND tests)
 
-enable_coverage(${This})
-enable_clang_tidy(${This})
-enable_cppcheck(${This})
+enable_coverage(${MainProgramTests})
+enable_clang_tidy(${MainProgramTests})
+enable_cppcheck(${MainProgramTests})
 
 if(ENABLE_CLANG_TIDY)
-    add_dependencies(${This} tidy_${This})
+    add_dependencies(${MainProgramTests} tidy_${MainProgramTests})
 endif()
 
 if(ENABLE_CPPCHECK)
-    add_dependencies(${This} cppcheck_${This})
+    add_dependencies(${MainProgramTests} cppcheck_${MainProgramTests})
 endif()
