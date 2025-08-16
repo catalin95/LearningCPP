@@ -1,5 +1,4 @@
 function(enable_coverage tests)
-    # Platform-specific LLVM tool setup
     if(APPLE)
         message(STATUS "Configuring coverage for Apple/Clang...")
         get_filename_component(COMPILER_PATH ${CMAKE_CXX_COMPILER} REALPATH)
