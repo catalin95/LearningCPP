@@ -1,21 +1,24 @@
 #include "work.hpp"
 
-auto func(const int32_t num) -> int32_t
-{
-    if (num > 0)
-    {
-        return num;
-    }
-    else
-    {
-        return 0;
-    }
-}
+#include <map>
+#include <print>
 
-auto func2(const int32_t num) -> int32_t
+namespace functions
 {
-    if (num > 0)
-        return num; 
-    else
-        return 0;
+    auto findDuplicate(const std::span<const int32_t> buffer) -> void
+    {
+        std::map<int32_t, int32_t> map = {std::make_pair(buffer[0], 1)};
+
+        for (int32_t index = 1; index < buffer.size(); ++index)
+        {
+            map[buffer[index]]++;
+        }
+
+        std::println("Starting to print duplicates: ");
+
+        for (const auto [key, value] : map)
+        {
+            if (value > 1) std::println("Found duplicate number: {} with occurence: {}", key, value);
+        }
+    }
 }

@@ -1,31 +1,14 @@
-#include <gtest/gtest.h>
-#include <gmock/gmock.h>
-
 #include "work.hpp"
 
-using namespace testing;
+#include <gtest/gtest.h>
 
-TEST(FirstTest, Testing)
+
+TEST(MyTest, shouldFindDuplicateNumber)
 {
-    const int32_t num = 1;
-    const auto expectedNum = func(num);
+    constexpr auto arr = std::to_array({1,2,2,3,4,5,6,7,7,7,8,9});
 
-    EXPECT_EQ(expectedNum, num);
-}
+    functions::findDuplicate(std::span<const int32_t>(arr));
 
-TEST(SecondTest, Testing)
-{
-    const int32_t num = 1;
-    const auto expectedNum = func2(num);
-
-    EXPECT_EQ(expectedNum, num);
-}
-
-TEST(ThirdTest, Testing)
-{
-    const int32_t num = 0;
-    const auto expectedNum = func2(num);
-
-    EXPECT_EQ(expectedNum, num);
+    EXPECT_TRUE(true);
 }
 

@@ -1,9 +1,15 @@
-#include "work.hpp"
 
-#include <cstdint>
+// #include "work.hpp"
+
+#include <array>
+#include <optional>
+#include <print>
+
+#include <memory>
 
 auto main() -> int32_t
 {
-    const int32_t num = 1;
-    [[maybe_unused]] const auto result = func(num);
+    const auto ptr = std::make_unique<int32_t>(1);
+
+    std::println("{}", *ptr);
 }

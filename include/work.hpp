@@ -1,6 +1,9 @@
 #pragma once
 
 #include <cstdint>
+#include <span>
 
-auto func(const int32_t num) -> int32_t;
-auto func2(const int32_t num) -> int32_t;
+namespace functions
+{
+    auto findDuplicate(const std::span<const int32_t> buffer) -> void;
+}
