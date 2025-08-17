@@ -1,11 +1,8 @@
-# include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_config/CompilerFlags.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_functions/CoverageFunctions.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_functions/UtilityFunctions.cmake)
 
 # Set the CMake package search path for Google Test
 list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib/cmake/GTest")
-
-set(CMAKE_BUILD_TYPE Debug)
 
 # Find Google Test package
 find_package(GTest REQUIRED)
