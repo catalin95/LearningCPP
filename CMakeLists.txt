@@ -16,6 +16,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Generate compile_commands.json"
 # Option to enable clang-tidy dependency
 option(ENABLE_CLANG_TIDY "Enable running clang-tidy as part of the build" OFF)
 option(ENABLE_CPPCHECK "Enable running cppcheck as part of the build" OFF)
+option(ENABLE_IWYU "Enable running iwyu as part of the build" OFF)
 
 enable_testing()
 
@@ -36,6 +37,7 @@ set_target_flags(${MainProgram}  ${CMAKE_BUILD_TYPE})
 # add custom target to run clang-tidy like tidy_target
 enable_clang_tidy(${MainProgram})
 enable_cppcheck(${MainProgram})
+enable_iwyu(${MainProgram} ${CMAKE_SOURCE_DIR})
 
 if(ENABLE_CLANG_TIDY)
     add_dependencies(${MainProgram} tidy_${MainProgram})
@@ -43,4 +45,8 @@ endif()
 
 if(ENABLE_CPPCHECK)
     add_dependencies(${MainProgram} cppcheck_${MainProgram})
+endif()
+
+if(ENABLE_IWYU)
+    add_dependencies(${MainProgram} iwyu_${MainProgram})
 endif()

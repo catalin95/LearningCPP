@@ -44,3 +44,31 @@ function(enable_cppcheck target)
         VERBATIM
     )
 endfunction()
+
+function(enable_iwyu target target_path)
+    if(NOT TARGET ${target})
+        message(FATAL_ERROR "Target ${target} does not exist")
+    endif()
+
+    # Path to IWYU binary (can be overridden with -DIWYU_BINARY=/path/to/iwyu)
+    set(IWYU_BINARY "include-what-you-use")
+
+    # Default flags (can be overridden by user)
+    set(IWYU_FLAGS
+        -std=c++23
+    )
+
+    add_custom_target(
+        iwyu_${target}
+        COMMAND ${CMAKE_COMMAND} -E echo "Running IWYU on target ${target}..."
+        COMMAND ${IWYU_BINARY} ${IWYU_FLAGS}
+        -I${CMAKE_SOURCE_DIR}/include
+        -I${CMAKE_SOURCE_DIR}/mocks
+        -I/opt/homebrew/include
+        ${target_path}/${target}.cpp
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Running include-what-you-use analysis"
+        VERBATIM
+    )
+endfunction()
+

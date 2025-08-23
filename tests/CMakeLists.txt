@@ -2,7 +2,7 @@ include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_functions/CoverageFunctions.cmake)
 include(${CMAKE_SOURCE_DIR}/cmake_utils/cmake_functions/UtilityFunctions.cmake)
 
 # Set the CMake package search path for Google Test
-list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib/cmake/GTest")
+# list(APPEND CMAKE_PREFIX_PATH "/usr/local/lib/cmake/GTest")
 
 # Find Google Test package
 find_package(GTest REQUIRED)
@@ -39,11 +39,12 @@ set_target_flags(${MainProgramTests} ${CMAKE_BUILD_TYPE})
 # enable_testing()
 
 # Add the test command to CTest
-add_test(NAME UnitTests COMMAND tests)
+add_test(NAME UnitTests COMMAND ${MainProgramTests})
 
 enable_coverage(${MainProgramTests})
 enable_clang_tidy(${MainProgramTests})
 enable_cppcheck(${MainProgramTests})
+enable_iwyu(${MainProgramTests} ${CMAKE_SOURCE_DIR}/tests)
 
 if(ENABLE_CLANG_TIDY)
     add_dependencies(${MainProgramTests} tidy_${MainProgramTests})
@@ -51,4 +52,8 @@ endif()
 
 if(ENABLE_CPPCHECK)
     add_dependencies(${MainProgramTests} cppcheck_${MainProgramTests})
+endif()
+
+if(ENABLE_IWYU)
+    add_dependencies(${MainProgramTests} iwyu_${MainProgramTests})
 endif()
