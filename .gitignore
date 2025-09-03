@@ -4,6 +4,7 @@
 .cache
 build
 compile_commands.json
+documentation
 .DS_Store
 default.profraw
 main.dSYM
