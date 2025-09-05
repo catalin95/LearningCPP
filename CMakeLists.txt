@@ -50,3 +50,18 @@ endif()
 if(ENABLE_IWYU)
     add_dependencies(${MainProgram} iwyu_${MainProgram})
 endif()
+
+# Collect all project sources (example: src/ + include/)
+file(GLOB_RECURSE ALL_SOURCE_FILES
+    ${CMAKE_SOURCE_DIR}/app.cpp
+    ${CMAKE_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_SOURCE_DIR}/include/*.hpp
+    ${CMAKE_SOURCE_DIR}/mocks/*.hpp
+    ${CMAKE_SOURCE_DIR}/tests/*.cpp
+)
+
+# Target to format all files
+add_clang_format(format FORMAT FILES ${ALL_SOURCE_FILES})
+
+# Target to check formatting
+add_clang_format(format-check CHECK FILES ${ALL_SOURCE_FILES})

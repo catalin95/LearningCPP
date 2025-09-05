@@ -1,0 +1,21 @@
+# .clang-format - custom for your project
+BasedOnStyle: LLVM
+
+# Use 4 spaces per indentation level
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+
+# Place opening braces on a new line
+BreakBeforeBraces: Allman
+
+# Optional: control spaces in other places (mostly LLVM default)
+AllowShortFunctionsOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# Keep column limit default (80)
+ColumnLimit: 80
+
+# Preserve existing line breaks in some cases
+BreakBeforeBinaryOperators: None

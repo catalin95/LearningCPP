@@ -70,3 +70,43 @@ function(set_target_flags target build_type)
 
     message(STATUS "Compiler flags used in main app set to: ${LOCAL_FLAGS}")
 endfunction()
+
+
+function(add_clang_format TARGET_NAME MODE)
+    # Collect all passed source files
+    set(options)
+    set(oneValueArgs)
+    set(multiValueArgs FILES)
+    cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    find_program(CLANG_FORMAT_BIN clang-format)
+    if (NOT CLANG_FORMAT_BIN)
+        message(FATAL_ERROR "clang-format not found!")
+    endif()
+
+    # Determine which style argument to use
+    if(EXISTS "${CMAKE_SOURCE_DIR}/.clang-format")
+        set(CL_STYLE_ARG "-style=file")
+    else()
+        set(CL_STYLE_ARG "-style=LLVM")  # fallback style if no .clang-format
+    endif()
+
+    if (MODE STREQUAL "FORMAT")
+        add_custom_target(
+            ${TARGET_NAME}
+            COMMAND ${CLANG_FORMAT_BIN} -i ${CL_STYLE_ARG} ${ARG_FILES}
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Formatting source files with clang-format"
+        )
+    elseif (MODE STREQUAL "CHECK")
+        add_custom_target(
+            ${TARGET_NAME}
+            COMMAND ${CLANG_FORMAT_BIN} --dry-run --Werror ${CL_STYLE_ARG} ${ARG_FILES}
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            COMMENT "Checking source file formatting with clang-format"
+        )
+    else()
+        message(FATAL_ERROR "Unknown mode for add_clang_format: ${MODE}")
+    endif()
+endfunction()
+
