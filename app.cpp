@@ -1,17 +1,27 @@
 
 // #include "work.hpp"
 
-#include <array>
 #include <cstdint>
-#include <optional>
 #include <print>
-#include <iostream>
 
-#include <memory>
+#ifdef __clangd__
+#include "modules/math.ixx"
+#endif
 
+import math;
+
+
+/**
+ * @file main.cpp
+ * @brief Main entry of the program.
+ * \return 0
+ */
 auto main() -> int32_t
 {
-    int* ptr = nullptr;
+    std::println("{}", add(1, 2));
 
-    std::cout << *ptr << '\n';
+    const auto obj = Calculator{};
+
+    std::println("{}", obj.mul(2, 2));
 }
+ 

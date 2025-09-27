@@ -8,8 +8,12 @@ set_default_cxx_compiler_if_needed()
 
 project(Learning VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(MainProgram app)
 set(CMAKE_BUILD_TYPE Debug)
+
+# Enable module support
+set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API 1)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Generate compile_commands.json" FORCE)
 
@@ -29,6 +33,16 @@ add_subdirectory(mocks)
 set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
 
 add_executable(${MainProgram} ${MainProgram}.cpp)
+
+target_sources(${MainProgram}
+    PRIVATE
+        ${MainProgram}.cpp
+    PRIVATE FILE_SET CXX_MODULES
+        FILES
+            ${CMAKE_SOURCE_DIR}/modules/math.ixx
+)
+
+
 
 target_include_directories(${MainProgram}  PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(${MainProgram}  PRIVATE work_lib)
