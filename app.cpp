@@ -5,11 +5,11 @@
 #include <print>
 
 #ifdef __clangd__
-#include "modules/math.ixx"
+#include "modules/work.ixx"
 #define import  // prevent Clangd from parsing the import keyword
 #endif
 
-import math;
+import work;
 
 /**
  * @file main.cpp

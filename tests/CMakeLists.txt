@@ -28,7 +28,7 @@ target_link_libraries(${MainProgramTests}
     GTest::gtest_main
     pthread
 )
-target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:math_module>)
+target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:work_module>)
 
 # Include necessary directories for the tests
 target_include_directories(${MainProgramTests} PRIVATE ${CMAKE_SOURCE_DIR}/include
