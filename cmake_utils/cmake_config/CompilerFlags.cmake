@@ -1,6 +1,7 @@
 set(DEBUG_CLANG_FLAGS
     -O0
     -g
+    -pthread
     -Wall
     -Wextra
     -Wpedantic

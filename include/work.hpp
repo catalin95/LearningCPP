@@ -5,5 +5,5 @@
 
 namespace functions
 {
-    auto findDuplicate(const std::span<const int32_t> buffer, int32_t num) -> void;
+    auto func() -> void;
 }

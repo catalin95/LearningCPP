@@ -9,13 +9,13 @@ find_package(GTest REQUIRED)
 
 # Set source files and the target name
 set(MainProgramTests app_tests)
-set(TEST_SOURCES ${MainProgramTests}.cpp ${CMAKE_SOURCE_DIR}/source/work.cpp)
+set(TEST_SOURCES ${MainProgramTests}.cpp ${CMAKE_SOURCE_DIR}/source/work.cpp) # TODO: fix this, link it, not build from it
 
 # Set CMake flags (you may already have specific debug flags for unit tests here)
 set(CMAKE_CXX_FLAGS ${DEBUG_UT_FLAGS})
 
 # Ensure that pthread is linked for the test target
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
 
 # Create the executable for tests
 add_executable(${MainProgramTests} ${TEST_SOURCES})
@@ -28,15 +28,13 @@ target_link_libraries(${MainProgramTests}
     GTest::gtest_main
     pthread
 )
+target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:math_module>)
 
 # Include necessary directories for the tests
 target_include_directories(${MainProgramTests} PRIVATE ${CMAKE_SOURCE_DIR}/include
                           ${CMAKE_SOURCE_DIR}/mocks)
 
 set_target_flags(${MainProgramTests} ${CMAKE_BUILD_TYPE})
-
-# # Enable testing
-# enable_testing()
 
 # Add the test command to CTest
 add_test(NAME UnitTests COMMAND ${MainProgramTests})

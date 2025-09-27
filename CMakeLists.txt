@@ -29,23 +29,15 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 add_subdirectory(source)
 add_subdirectory(tests)
 add_subdirectory(mocks)
+add_subdirectory(modules)
 
 set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
 
 add_executable(${MainProgram} ${MainProgram}.cpp)
 
-target_sources(${MainProgram}
-    PRIVATE
-        ${MainProgram}.cpp
-    PRIVATE FILE_SET CXX_MODULES
-        FILES
-            ${CMAKE_SOURCE_DIR}/modules/math.ixx
-)
-
-
-
 target_include_directories(${MainProgram}  PRIVATE ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(${MainProgram}  PRIVATE work_lib)
+target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:math_module>)
 set_target_flags(${MainProgram}  ${CMAKE_BUILD_TYPE})
 
 # add custom target to run clang-tidy like tidy_target

@@ -6,10 +6,10 @@
 
 #ifdef __clangd__
 #include "modules/math.ixx"
+#define import  // prevent Clangd from parsing the import keyword
 #endif
 
 import math;
-
 
 /**
  * @file main.cpp
