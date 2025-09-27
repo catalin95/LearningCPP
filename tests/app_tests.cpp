@@ -5,7 +5,7 @@
 #include <iostream>
 
 import work;
-
+import work2;
 
 #if 0
 TEST(MyTest, shouldFindDuplicateNumber)

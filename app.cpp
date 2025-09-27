@@ -5,6 +5,7 @@
 #include <print>
 
 import work;
+import work2;
 
 /**
  * @file main.cpp
@@ -19,4 +20,3 @@ auto main() -> int32_t
 
     std::println("{}", obj.mul(2, 2));
 }
- 

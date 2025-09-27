@@ -30,6 +30,7 @@ target_link_libraries(${MainProgramTests}
 )
 # Link the OBJECT files into the test executable
 target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:work_module>)
+target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:work2_module>)
 target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:work_lib_obj>)
 
 # Include necessary directories for the tests
