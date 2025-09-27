@@ -4,12 +4,6 @@
 #include <cstdint>
 #include <print>
 
-// #ifdef __clangd__
-// #include "modules/work.ixx"
-// #define import  // prevent Clangd from parsing the import keyword
-// #endif
-
-
 import work;
 
 /**
