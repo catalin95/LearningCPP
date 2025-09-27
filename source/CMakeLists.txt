@@ -1,4 +1,7 @@
-set(LIB_SOURCES work.cpp)
-# add_library(work_lib STATIC ${LIB_SOURCES}) # this was a static lib
-add_library(work_lib SHARED ${LIB_SOURCES}) # this is a shared lib now
-target_include_directories(work_lib PUBLIC ${CMAKE_SOURCE_DIR}/include)
+
+add_library(work_lib_obj OBJECT work.cpp)
+target_compile_options(work_lib_obj PUBLIC
+    $<$<CONFIG:Debug>:-fprofile-instr-generate -fcoverage-mapping -fno-inline>
+    $<$<COMPILE_LANGUAGE:CXX>:${SANITIZER_FLAGS} -pthread>
+)
+target_include_directories(work_lib_obj PUBLIC ${CMAKE_SOURCE_DIR}/include)

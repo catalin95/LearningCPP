@@ -9,7 +9,7 @@ find_package(GTest REQUIRED)
 
 # Set source files and the target name
 set(MainProgramTests app_tests)
-set(TEST_SOURCES ${MainProgramTests}.cpp ${CMAKE_SOURCE_DIR}/source/work.cpp) # TODO: fix this, link it, not build from it
+set(TEST_SOURCES ${MainProgramTests}.cpp) # TODO: fix this, link it, not build from it
 
 # Set CMake flags (you may already have specific debug flags for unit tests here)
 set(CMAKE_CXX_FLAGS ${DEBUG_UT_FLAGS})
@@ -28,7 +28,9 @@ target_link_libraries(${MainProgramTests}
     GTest::gtest_main
     pthread
 )
+# Link the OBJECT files into the test executable
 target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:work_module>)
+target_sources(${MainProgramTests} PRIVATE $<TARGET_OBJECTS:work_lib_obj>)
 
 # Include necessary directories for the tests
 target_include_directories(${MainProgramTests} PRIVATE ${CMAKE_SOURCE_DIR}/include

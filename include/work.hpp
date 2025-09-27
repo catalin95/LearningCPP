@@ -5,5 +5,5 @@
 
 namespace functions
 {
-    auto func() -> void;
+    auto func() -> int32_t;
 }

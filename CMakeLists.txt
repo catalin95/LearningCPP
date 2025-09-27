@@ -36,8 +36,10 @@ set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
 add_executable(${MainProgram} ${MainProgram}.cpp)
 
 target_include_directories(${MainProgram}  PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(${MainProgram}  PRIVATE work_lib)
+# target_link_libraries(${MainProgram}  PRIVATE work_lib)
 target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:work_module>)
+target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:work_lib_obj>)
+# target_link_libraries(${MainProgram} PRIVATE work_lib_obj)
 set_target_flags(${MainProgram}  ${CMAKE_BUILD_TYPE})
 
 # add custom target to run clang-tidy like tidy_target

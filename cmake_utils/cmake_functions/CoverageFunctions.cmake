@@ -29,16 +29,17 @@ function(enable_coverage tests)
 
     # Custom target to run tests and generate coverage
     add_custom_target(coverage
-        COMMAND ${CMAKE_COMMAND} -E env LLVM_PROFILE_FILE=${CMAKE_BINARY_DIR}/default.profraw $<TARGET_FILE:${tests}> || true
-        COMMAND ${LLVM_PROFDATA} merge -sparse ${CMAKE_BINARY_DIR}/default.profraw -o ${CMAKE_BINARY_DIR}/default.profdata
+        COMMAND ${CMAKE_COMMAND} -E env LLVM_PROFILE_FILE=${CMAKE_BINARY_DIR}/default-%p.profraw $<TARGET_FILE:app_tests>
+        COMMAND ${LLVM_PROFDATA} merge -sparse ${CMAKE_BINARY_DIR}/default-*.profraw -o ${CMAKE_BINARY_DIR}/default.profdata
         COMMAND ${LLVM_COV} show
             --format=html
             --instr-profile=${CMAKE_BINARY_DIR}/default.profdata
             -o ${CMAKE_BINARY_DIR}/coverage_report
-            $<TARGET_FILE:${tests}>
+            $<TARGET_FILE:app_tests>
             --ignore-filename-regex='/usr/.*|.*tests?.*.cpp'
             --use-color
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMENT "Generating code coverage report using LLVM tools"
     )
+
 endfunction()

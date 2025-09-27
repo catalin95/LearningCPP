@@ -47,3 +47,8 @@ TEST(FirstTest, Test1)
 
     EXPECT_EQ(actualResult, expectedResult);
 }
+
+TEST(SecondTest, Test1)
+{
+    EXPECT_EQ(1, functions::func());
+}
