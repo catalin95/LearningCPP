@@ -1,4 +1,4 @@
-Checks:          '*, -clang-analyzer-*, -llvmlibc-*'
+Checks:          '*, -clang-analyzer-*, -llvmlibc-*, -llvm-header-guard, -portability-avoid-pragma-once, -fuchsia-trailing-return'
 WarningsAsErrors: ''
-HeaderFilterRegex: '.*'  # only user headers, or leave empty for all
+HeaderFilterRegex: '.*'   # or limit to your headers if you want
 SystemHeaders:   false
