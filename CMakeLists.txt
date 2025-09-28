@@ -33,6 +33,8 @@ add_subdirectory(modules)
 
 set(CMAKE_CXX_FLAGS ${DEBUG_MAIN_FLAGS})
 
+# set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-checks=*;-header-filter=.*;--system-headers")
+
 add_executable(${MainProgram} ${MainProgram}.cpp)
 
 target_include_directories(${MainProgram}  PRIVATE ${CMAKE_SOURCE_DIR}/include)

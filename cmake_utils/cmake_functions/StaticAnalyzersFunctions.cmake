@@ -3,23 +3,44 @@ function(enable_clang_tidy target)
         message(FATAL_ERROR "Target ${target} does not exist")
     endif()
 
-    get_target_property(SOURCES ${target} SOURCES)
-    if(NOT SOURCES)
-        message(WARNING "Target ${target} has no sources to run clang-tidy on")
+    set(CLANG_TIDY_BINARY "clang-tidy")
+
+    # Collect all cpp source files in source directory
+    file(GLOB_RECURSE CPP_SOURCES
+         "${CMAKE_SOURCE_DIR}/source/*.cpp"
+    )
+
+    if(NOT CPP_SOURCES)
+        message(WARNING "No C++ sources found for clang-tidy in source")
         return()
     endif()
 
-    set(CLANG_TIDY_BINARY "clang-tidy")
+    # Collect all module targets for dependency (optional)
+    set(MODULE_TARGETS "")
+    get_property(ALL_TARGETS DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY BUILDSYSTEM_TARGETS)
+    foreach(tgt IN LISTS ALL_TARGETS)
+        if(tgt MATCHES ".*module.*")
+            list(APPEND MODULE_TARGETS ${tgt})
+        endif()
+    endforeach()
+
+    message(STATUS "Catalin -> print cpp sources: ")
 
     add_custom_target(
         tidy_${target}
-        COMMAND ${CMAKE_COMMAND} -E echo "Running clang-tidy on target ${target}..."
-        COMMAND ${CLANG_TIDY_BINARY} -p ${CMAKE_BINARY_DIR} ${SOURCES}
+        COMMAND ${CMAKE_COMMAND} -E echo "Running clang-tidy on CPP files..."
+        COMMAND ${CLANG_TIDY_BINARY} -p ${CMAKE_BINARY_DIR} ${CPP_SOURCES}
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        COMMENT "Running clang-tidy static analysis"
+        COMMENT "Running clang-tidy static analysis on .cpp files only"
+        DEPENDS ${MODULE_TARGETS} ${target}  # ensure modules and target are built first
         VERBATIM
     )
 endfunction()
+
+
+
+
+
 
 function(enable_cppcheck target)
     if(NOT TARGET ${target})

@@ -1,0 +1,4 @@
+Checks:          '*, -clang-analyzer-*, -llvmlibc-*'
+WarningsAsErrors: ''
+HeaderFilterRegex: '.*'  # only user headers, or leave empty for all
+SystemHeaders:   false

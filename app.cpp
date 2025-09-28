@@ -4,8 +4,8 @@
 #include <cstdint>
 #include <print>
 
-import work;
-import work2;
+// import work;
+// import work2;
 
 /**
  * @file main.cpp
@@ -14,9 +14,9 @@ import work2;
  */
 auto main() -> int32_t
 {
-    std::println("{}", add(1, 2));
+    // std::println("{}", add(1, 2));
 
-    const auto obj = Calculator{};
+    // const auto obj = Calculator{};
 
-    std::println("{}", obj.mul(2, 2));
+    // std::println("{}", obj.mul(2, 2));
 }
