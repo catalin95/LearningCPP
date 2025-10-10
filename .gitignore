@@ -8,3 +8,6 @@ documentation
 .DS_Store
 default.profraw
 main.dSYM
+.clang_format
+.clang-tidy
+.clangd

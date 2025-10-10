@@ -7,10 +7,10 @@ TabWidth: 4
 UseTab: Never
 
 # Place opening braces on a new line
-BreakBeforeBraces: Allman
+BreakBeforeBraces: Attach
 
 # Optional: control spaces in other places (mostly LLVM default)
-AllowShortFunctionsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: true
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 

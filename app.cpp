@@ -4,8 +4,12 @@
 #include <cstdint>
 #include <print>
 
-// import work;
-// import work2;
+#define EXPERIMENTAL_IMPORTS 1
+
+#if EXPERIMENTAL_IMPORTS
+import work;
+import work2;
+#endif
 
 /**
  * @file main.cpp
@@ -14,9 +18,9 @@
  */
 auto main() -> int32_t
 {
-    // std::println("{}", add(1, 2));
+    std::println("{}", add(1, 2));
 
-    // const auto obj = Calculator{};
+    const auto obj = Calculator{};
 
-    // std::println("{}", obj.mul(2, 2));
+    std::println("{}", obj.mul(2, 2));
 }
