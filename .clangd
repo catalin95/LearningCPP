@@ -1,2 +1,2 @@
 CompileFlags:
-  Add: [-fmodules, -fimplicit-modules, -fmodules-cache-path=build/.clangd-modules, -std=c++23, -Iinclude, -Imodules]
+  Add: [-std=c++23, -Iinclude]

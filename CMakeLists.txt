@@ -11,6 +11,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(MainProgram app)
 set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_EXE_LINKER_FLAGS "" CACHE STRING "Linker flags" FORCE)
 
 # Enable module support
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API 1)
@@ -39,8 +40,8 @@ add_executable(${MainProgram} ${MainProgram}.cpp)
 
 target_include_directories(${MainProgram}  PRIVATE ${CMAKE_SOURCE_DIR}/include)
 # target_link_libraries(${MainProgram}  PRIVATE work_lib)
-target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:work_module>)
-target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:work2_module>)
+#target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:work_module>)
+#target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:work2_module>)
 target_sources(${MainProgram} PRIVATE $<TARGET_OBJECTS:work_lib_obj>)
 # target_link_libraries(${MainProgram} PRIVATE work_lib_obj)
 set_target_flags(${MainProgram}  ${CMAKE_BUILD_TYPE})

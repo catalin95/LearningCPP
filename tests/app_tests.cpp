@@ -4,8 +4,6 @@
 
 #include <iostream>
 
-import work;
-import work2;
 
 #if 0
 TEST(MyTest, shouldFindDuplicateNumber)
@@ -32,17 +30,3 @@ TEST(MyTest, SecontTest)
 #endif
 
 // import math;
-
-TEST(FirstTest, Test1)
-{
-    const auto expectedResult = 4;
-
-    const auto actualResult = add(2, 2);
-
-    EXPECT_EQ(actualResult, expectedResult);
-}
-
-TEST(SecondTest, Test1)
-{
-    EXPECT_EQ(1, functions::func());
-}

@@ -5,7 +5,7 @@ BUILD_DIR := "build"
 TESTS_BUILD_DIR := "build/tests/"
 
 configure BUILD_DIR=BUILD_DIR:
-    cmake -G Ninja -B "{{BUILD_DIR}}" -S .
+    cmake -G Ninja -DCMAKE_EXE_LINKER_FLAGS="" -B "{{BUILD_DIR}}" -S .
 
 build TARGET BUILD_DIR=BUILD_DIR:
     cmake --build "{{BUILD_DIR}}" --target "{{TARGET}}"
