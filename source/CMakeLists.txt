@@ -6,3 +6,4 @@ target_compile_options(work_lib_obj PUBLIC
 )
 set_target_properties(work_lib_obj PROPERTIES CXX_ENABLE_MODULES ON)
 target_include_directories(work_lib_obj PUBLIC ${CMAKE_SOURCE_DIR}/include)
+

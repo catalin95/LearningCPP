@@ -3,7 +3,4 @@
 #include <cstdint>
 #include <span>
 
-namespace functions
-{
-    auto func() -> int32_t;
-}
+auto func(int x, int y) -> int;

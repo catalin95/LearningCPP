@@ -10,7 +10,7 @@ UseTab: Never
 BreakBeforeBraces: Attach
 
 # Optional: control spaces in other places (mostly LLVM default)
-AllowShortFunctionsOnASingleLine: true
+AllowShortFunctionsOnASingleLine: false
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
 
@@ -19,3 +19,9 @@ ColumnLimit: 80
 
 # Preserve existing line breaks in some cases
 BreakBeforeBinaryOperators: None
+
+# For template
+AlwaysBreakTemplateDeclarations: Yes
+
+# Keep * and & close to type
+PointerAlignment: Left

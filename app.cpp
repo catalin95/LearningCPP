@@ -1,9 +1,11 @@
 
-// #include "work.hpp"
-
 #include "work.hpp"
+
+#include <array>
 #include <cstdint>
 #include <print>
+#include <span>
+#include <vector>
 
 using std::println;
 
@@ -12,4 +14,10 @@ using std::println;
  * @brief Main entry of the program.
  * \return 0
  */
-auto main() -> int32_t { const auto num = functions::func(); }
+auto main() -> int32_t {
+    int num = 1;
+    int num2 = 2;
+    const auto result = func(num, num2);
+
+    println("Printing result: {}", result);
+}

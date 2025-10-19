@@ -23,6 +23,7 @@ add_executable(${MainProgramTests} ${TEST_SOURCES})
 # Link the necessary libraries to the tests executable
 target_link_libraries(${MainProgramTests}
   PRIVATE
+    # work_lib_obj
     GTest::gtest
     GTest::gmock
     GTest::gtest_main

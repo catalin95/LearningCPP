@@ -1,22 +1,9 @@
 #include "work.hpp"
 
-#include <print>
+#include <algorithm>
+#include <ranges>
 
-namespace functions
-{
-    namespace
-    {
-        auto func() -> void
-        {
-            auto num = 1;
-            std::println("Printing num: {}", num);
-        }
-    }
-
-    auto func() -> int32_t
-    {
-        auto num = 1;
-        return num;
-    }
+auto func(int x, int y) -> int {
+    return x + y;
 }
-
+//
