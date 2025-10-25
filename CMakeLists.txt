@@ -10,8 +10,10 @@ project(Learning VERSION 1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(MainProgram app)
-set(CMAKE_BUILD_TYPE Debug)
+# set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_EXE_LINKER_FLAGS "" CACHE STRING "Linker flags" FORCE)
+
+message(STATUS "!!!!!!!!! cmake build type is: ${CMAKE_BUILD_TYPE}")
 
 # Enable module support
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API 1)
