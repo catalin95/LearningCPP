@@ -13,7 +13,7 @@ set(MainProgram app)
 # set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_EXE_LINKER_FLAGS "" CACHE STRING "Linker flags" FORCE)
 
-message(STATUS "!!!!!!!!! cmake build type is: ${CMAKE_BUILD_TYPE}")
+message(STATUS "Cmake build type is: ${CMAKE_BUILD_TYPE}")
 
 # Enable module support
 set(CMAKE_EXPERIMENTAL_CXX_MODULE_CMAKE_API 1)

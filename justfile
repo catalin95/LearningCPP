@@ -6,6 +6,7 @@ TESTS := "tests"
 PROFILE := "brew-clang"
 BUILD_TYPE := "Debug"
 PRESET_TYPE := "debug"
+COMPILE_COMMANDS := "compile_commands.json"
 
 configure BUILD_TYPE=BUILD_TYPE PROFILE=PROFILE:
     conan install . --profile {{PROFILE}} --build=missing -s build_type={{BUILD_TYPE}}
@@ -23,6 +24,24 @@ run TARGET BUILD_TYPE=BUILD_TYPE BUILD_DIR=BUILD_DIR:
     ./{{BUILD_DIR}}/{{BUILD_TYPE}}/{{TARGET}}; \
     fi
 
+purge BUILD_DIR=BUILD_DIR:
+    if [ -d "{{BUILD_DIR}}" ]; then \
+        echo "Removing build directory: {{BUILD_DIR}}"; \
+        rm -rf "{{BUILD_DIR}}"; \
+        echo "Done removing build directory! Use configure to regenerate build files"; \
+    else \
+        echo "Build directory '{{BUILD_DIR}}' does not exist"; \
+    fi
+
+clean BUILD_TYPE=BUILD_TYPE BUILD_DIR=BUILD_DIR:
+    rm -rf {{BUILD_DIR}}/{{BUILD_TYPE}}
+    echo "Finished removing: {{BUILD_DIR}}/{{BUILD_TYPE}}"
+
+set_clangd BUILD_TYPE=BUILD_TYPE:
+    rm -f {{COMPILE_COMMANDS}}
+    ln -s {{BUILD_DIR}}/{{BUILD_TYPE}}/{{COMPILE_COMMANDS}} {{COMPILE_COMMANDS}}
+
+
 # clean BUILD_DIR=BUILD_DIR:
 #     if [ -d "{{BUILD_DIR}}" ]; then \
 #         echo "Removing build directory: {{BUILD_DIR}}"; \
@@ -33,13 +52,4 @@ run TARGET BUILD_TYPE=BUILD_TYPE BUILD_DIR=BUILD_DIR:
 #     else \
 #         echo "Build directory '{{BUILD_DIR}}' does not exist"; \
 #     fi
-
-clean BUILD_DIR=BUILD_DIR:
-    if [ -d "{{BUILD_DIR}}" ]; then \
-        echo "Removing build directory: {{BUILD_DIR}}"; \
-        rm -rf "{{BUILD_DIR}}"; \
-        echo "Done removing build directory! Use configure to regenerate build files"; \
-    else \
-        echo "Build directory '{{BUILD_DIR}}' does not exist"; \
-    fi
-
+   
