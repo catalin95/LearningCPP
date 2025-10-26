@@ -25,3 +25,10 @@ AlwaysBreakTemplateDeclarations: Yes
 
 # Keep * and & close to type
 PointerAlignment: Left
+
+BinPackArguments: false
+BinPackParameters: false
+AllowAllArgumentsOnNextLine: false
+
+InsertNewlineAtEOF: true
+KeepEmptyLinesAtEOF: true
