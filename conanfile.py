@@ -17,13 +17,39 @@ class MyProjectConan(ConanFile):
         Install system packages only if not already installed.
         """
         if self.settings.os == "Linux":
-            # Check if gtest is installed
+            print("Checking system packages for Linux...")
+            installer = self._get_linux_installer()
+
+            # Check for GTest
             if not os.path.exists("/usr/include/gtest/gtest.h"):
-                # Install system package
-                installer = self._get_linux_installer()
-                installer.install("libgtest-dev")  # apt
-        # You could add clang-tidy, cppcheck, iwyu similarly
+                print("Installing libgtest-dev...")
+                installer.install(["libgtest-dev"])
+
+            # Check for Boost
+            if not os.path.exists("/usr/include/boost/version.hpp"):
+                print("Installing libboost-all-dev...")
+                installer.install(["libboost-all-dev"])
+
+        elif self.settings.os == "Macos":
+            print("Checking system packages for macOS...")
+            installer = self._get_macos_installer()
+
+            # Check for GTest
+            if not os.path.exists("/usr/local/include/gtest/gtest.h") and \
+               not os.path.exists("/opt/homebrew/include/gtest/gtest.h"):
+                print("Installing googletest via Homebrew...")
+                installer.install(["googletest"])
+
+            # Check for Boost
+            if not os.path.exists("/usr/local/include/boost/version.hpp") and \
+               not os.path.exists("/opt/homebrew/include/boost/version.hpp"):
+                print("Installing boost via Homebrew...")
+                installer.install(["boost"])
 
     def _get_linux_installer(self):
         from conan.tools.system.package_manager import Apt
         return Apt(self)
+
+    def _get_macos_installer(self):
+        from conan.tools.system.package_manager import Brew
+        return Brew(self)
